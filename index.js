@@ -21,6 +21,7 @@ bot.command('retiming', async (ctx) => {
     )
   const link = msgArray[0].trim()
   const time = msgArray[1].trim()
+  const hasParams = link.includes('?')
   if (
     !link.includes('youtube.com') &&
     !link.includes('www.youtube.com') &&
@@ -38,7 +39,7 @@ bot.command('retiming', async (ctx) => {
       "Dude! the time you want must contains (m, s, h), consider the following:\n• hour = h \n• minute = m \n• second = s\n if you want the link directive you to the first minute at the 14th second just put like that '1m14s'"
     )
 
-  return await ctx.reply(`${link}?t=${time}`)
+  return await ctx.reply(`${hasParams ? `${link}&t=` : `${link}?t=`}${time}`)
 })
 
 bot.launch({
